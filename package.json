@@ -1,0 +1,13 @@
+{
+    "name": "insomnia-plugin-veracode-hmac",
+    "version": "1.0.0",
+    "main": "plugin.js",
+    "insomnia": {
+        "name": "veracode-hmac",
+        "description": "Adds HMAC authentication to Veracode API requests"
+    },
+    "dependencies": {
+        "configparser": "^0.2.6",
+        "sjcl": "^1.0.7"
+    }
+}
