@@ -1,10 +1,10 @@
 {
     "name": "insomnia-plugin-veracode-hmac",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "plugin.js",
     "insomnia": {
         "name": "veracode-hmac",
-        "description": "Adds HMAC authentication to Veracode API requests"
+        "description": "Adds an HMAC authentication header to Veracode API requests in Insomnia"
     },
     "dependencies": {
         "configparser": "^0.2.6",
