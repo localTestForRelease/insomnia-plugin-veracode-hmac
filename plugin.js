@@ -7,7 +7,7 @@ const ConfigParser = require('configparser');
 module.exports.requestHooks = [
     context => {
 
-        const authProfile = context.request.getEnvironmentVariable('veracode_auth_profile');
+        var authProfile = context.request.getEnvironmentVariable('veracode_auth_profile');
         if (!authProfile) {
             authProfile = 'default'
         }
