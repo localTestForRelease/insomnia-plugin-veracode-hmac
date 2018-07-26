@@ -27,3 +27,7 @@ The authentication profile used can be selected using an environment variable in
     "veracode_auth_profile": "someotheraccount"
 }
 ```
+
+## Insomnia workspace
+
+An Insomnia workspace export is available in `veracode-rest-api.json`
