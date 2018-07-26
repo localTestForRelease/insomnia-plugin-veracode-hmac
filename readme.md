@@ -1,6 +1,6 @@
 # insomnia-plugin-veracode-hmac
 
-Adds HMAC an authentication header to Veracode API requests in Insomnia
+Adds an HMAC authentication header to Veracode API requests in Insomnia
 
 ## Install
 

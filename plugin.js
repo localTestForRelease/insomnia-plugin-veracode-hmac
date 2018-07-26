@@ -1,29 +1,27 @@
 const path = require('path');
 const os = require('os');
+const configparser = require('configparser');
 const hmac = require('./veracode-hmac.js');
-const ConfigParser = require('configparser');
 
 // Request hook to set header on every request
 module.exports.requestHooks = [
     context => {
+        let url = new URL(context.request.getUrl());
+        
+        if (url.protocol === 'https:' && url.hostname === 'api.veracode.com') {
+            let authProfile = context.request.getEnvironmentVariable('veracode_auth_profile');
+            if (!authProfile) {
+                authProfile = 'default';
+            }
+            let veracodeCredsFile = path.join(os.homedir(), '.veracode', 'credentials');
+            let config = new configparser();
+            config.read(veracodeCredsFile);
+            let id = config.get(authProfile, 'veracode_api_key_id');
+            let key = config.get(authProfile, 'veracode_api_key_secret'); 
 
-        var authProfile = context.request.getEnvironmentVariable('veracode_auth_profile');
-        if (!authProfile) {
-            authProfile = 'default'
+            let header = hmac.calculateAuthorizationHeader(id, key, url.hostname, url.pathname, url.search, context.request.getMethod());
+            context.request.setHeader('Authorization', header);
         }
 
-        const veracodeCredsFile = path.join(os.homedir(), '.veracode', 'credentials');
-        const config = new ConfigParser();
-        config.read(veracodeCredsFile);
-        const id = config.get(authProfile, 'veracode_api_key_id');
-        const key = config.get(authProfile, 'veracode_api_key_secret'); 
-        const hostname = "api.veracode.com";
-        
-    if (context.request.getUrl().startsWith('https://api.veracode.com')) {
-        var parser = document.createElement('a');
-        parser.href = context.request.getUrl();
-
-        var header = hmac.CalculateAuthorizationHeader(id, key, hostname, parser.pathname, parser.search, context.request.getMethod());
-        context.request.setHeader('Authorization', header);
     }
-}];
+];
