@@ -3,12 +3,14 @@ const os = require('os');
 const configparser = require('configparser');
 const hmac = require('./veracode-hmac.js');
 
+const hosts = ['api.veracode.com', 'analysiscenter.veracode.com', 'api.veracode.io'];
+
 // Request hook to set header on every request
 module.exports.requestHooks = [
     context => {
         let url = new URL(context.request.getUrl());
         
-        if (url.protocol === 'https:' && url.hostname === 'api.veracode.com') {
+        if (url.protocol === 'https:' && hosts.includes(url.hostname)) {
             let authProfile = context.request.getEnvironmentVariable('veracode_auth_profile');
             if (!authProfile) {
                 authProfile = 'default';
