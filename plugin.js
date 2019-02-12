@@ -27,7 +27,6 @@ module.exports.requestHooks = [
                 return accum + `${item.name}=${item.value}&`;
             }, paramStringInitialValue);
             paramsString = paramsString.slice(0, -1);
-            console.log(paramsString);
 
             let header = hmac.calculateAuthorizationHeader(id, key, url.hostname, url.pathname, paramsString, context.request.getMethod());
             context.request.setHeader('Authorization', header);
