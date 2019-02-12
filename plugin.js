@@ -24,7 +24,13 @@ module.exports.requestHooks = [
 
             let paramStringInitialValue = url.search === '' ? '?' : url.search + '&';
             let paramsString = params.reduce((accum, item, index, arr) => {
-                return accum + `${item.name}=${item.value}&`;
+                if (item.name === '') {
+                    return accum;
+                } else if (item.value === '') {
+                    return `${accum}${item.name}&`
+                } else {
+                    return `${accum}${item.name}=${item.value}&`
+                }
             }, paramStringInitialValue);
             paramsString = paramsString.slice(0, -1);
 
