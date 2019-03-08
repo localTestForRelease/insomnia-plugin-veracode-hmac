@@ -3,7 +3,7 @@ const os = require('os');
 const configparser = require('configparser');
 const hmac = require('./veracode-hmac.js');
 
-const hosts = ['api.veracode.com', 'analysiscenter.veracode.com', 'api.veracode.io'];
+const hosts = ['api.veracode.com', 'analysiscenter.veracode.com', 'api.veracode.io', 'api.sourceclear.io'];
 
 // Request hook to set header on every request
 module.exports.requestHooks = [
