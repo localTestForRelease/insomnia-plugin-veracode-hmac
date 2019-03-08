@@ -1,6 +1,6 @@
 {
     "name": "insomnia-plugin-veracode-hmac",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "main": "plugin.js",
     "insomnia": {
         "name": "veracode-hmac",
