@@ -40,11 +40,11 @@ function toHexBinary(input) {
 
 function calculateAuthorizationHeader(id, key, hostName, uriString, urlQueryParams, httpMethod) {
     uriString += urlQueryParams;
-    let data = util.format("id=%s&host=%s&url=%s&method=%s", id, hostName, uriString, httpMethod);
+    let data = `id=${id}&host=${hostName}&url=${uriString}&method=${httpMethod}`;
     let dateStamp = Date.now().toString();
     let nonceBytes = newNonce(nonceSize);
     let dataSignature = calulateDataSignature(key, nonceBytes, dateStamp, data);
-    let authorizationParam = util.format("id=%s,ts=%s,nonce=%s,sig=%s", id, dateStamp, toHexBinary(nonceBytes), dataSignature.toUpperCase());
+    let authorizationParam = `id=${id},ts=${dateStamp},nonce=${toHexBinary(nonceBytes)},sig=${dataSignature}`;
     let header = authorizationScheme + " " + authorizationParam;
     return header;
 }
