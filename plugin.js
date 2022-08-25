@@ -19,8 +19,8 @@ module.exports.requestHooks = [
             let veracodeCredsFile = path.join(os.homedir(), '.veracode', 'credentials');
             let config = new configparser();
             config.read(veracodeCredsFile);
-            let id = config.get(authProfile, 'veracode_api_key_id');             
-            let key = config.get(authProfile, 'veracode_api_key_secret'); 
+            let id = config.get(authProfile, 'veracode_api_key_id');
+            let key = config.get(authProfile, 'veracode_api_key_secret');
             if (id[8] === '-' && key[8] === '-') {
                 id = id.substring(9);
                 key = key.substring(9);
